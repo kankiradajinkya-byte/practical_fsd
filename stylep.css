@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f4f7;
+}
+
+/* Header */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+/* Main Layout */
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+/* Card Style */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    color: #2c3e50;
+}
+
+/* List Styling */
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 12px;
+}
+
+/* Profile Card */
+.profile-card {
+    text-align: center;
+}
+
+/* Profile Image */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;   /* Makes image circular */
+    object-fit: cover;    /* Prevents image distortion */
+    margin-bottom: 15px;
+    border: 3px solid #2c3e50;
+}
