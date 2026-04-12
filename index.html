@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React Form - Improved UI</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4facfe;
+            box-shadow: 0 0 5px rgba(79,172,254,0.5);
+        }
+
+        .error {
+            border: 2px solid red;
+        }
+
+        .errorMsg {
+            color: red;
+            font-size: 13px;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #4facfe;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #3a8de0;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+
+function FormApp() {
+
+    const [name, setName] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [errors, setErrors] = React.useState({});
+    const [success, setSuccess] = React.useState("");
+
+    function validate() {
+        let err = {};
+
+        if (!name) {
+            err.name = "Name is required";
+        }
+
+        if (!email) {
+            err.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            err.email = "Invalid email format";
+        }
+
+        return err;
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        let validationErrors = validate();
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length === 0) {
+            setSuccess("Form submitted successfully!");
+            setName("");
+            setEmail("");
+        } else {
+            setSuccess("");
+        }
+    }
+
+    return (
+        <div className="card">
+            <h2>Student Form</h2>
+
+            <form onSubmit={handleSubmit}>
+
+                <input
+                    type="text"
+                    placeholder="Enter Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className={errors.name ? "error" : ""}
+                />
+                <div className="errorMsg">{errors.name}</div>
+
+                <input
+                    type="text"
+                    placeholder="Enter Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={errors.email ? "error" : ""}
+                />
+                <div className="errorMsg">{errors.email}</div>
+
+                <button type="submit">Submit</button>
+
+            </form>
+
+            <div className="success">{success}</div>
+        </div>
+    );
+}
+
+ReactDOM.render(<FormApp />, document.getElementById("app"));
+
+</script>
+
+</body>
+</html>
